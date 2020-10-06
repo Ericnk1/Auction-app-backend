@@ -1,4 +1,4 @@
-package auctionappproject.demo.model;
+package auctionappproject.demo.models;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,13 +12,14 @@ import javax.persistence.*;
 public class Item {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    private String topic;
+    private String category;
     private String description;
     private double price;
     private String endDate;
+    private boolean isActive;
 
     @ManyToOne
     private User seller;
