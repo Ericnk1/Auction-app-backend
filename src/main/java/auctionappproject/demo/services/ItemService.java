@@ -11,7 +11,7 @@ public interface ItemService {
 
     List<Item> getAllItemsByCategory(String category);
 
-    Optional<Item> findItemById(Long id);
+    Optional<Item> findItemById(String id);
 
     Optional<Item> findItemByName(String name);
 
@@ -25,5 +25,5 @@ public interface ItemService {
 
     void updateItem(Item item);
 
-    void deleteItem(Long id);
+    void deleteItem(String id);
 }

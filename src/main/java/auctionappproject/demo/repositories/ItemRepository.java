@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ItemRepository extends JpaRepository<Item, Long> {
+public interface ItemRepository extends JpaRepository<Item, String> {
 
     List<Item> findBySellerUsername (String username);
     List<Item> findByBuyerUsername (String username);

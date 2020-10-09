@@ -33,7 +33,7 @@ public class ItemController {
     }
 
     @GetMapping("/items/id")
-    public Optional<Item> getItemById(@PathVariable Long id){
+    public Optional<Item> getItemById(@PathVariable String id){
         return itemService.findItemById(id);
     }
 
@@ -65,7 +65,7 @@ public class ItemController {
     }
 
     @GetMapping("/delete/{id}")
-    public ResponseEntity  deleteItem(@PathVariable Long id) {
+    public ResponseEntity  deleteItem(@PathVariable String id) {
         itemService.deleteItem(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

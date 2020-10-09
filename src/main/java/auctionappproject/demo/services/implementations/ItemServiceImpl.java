@@ -34,7 +34,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public Optional<Item> findItemById(Long id) {
+    public Optional<Item> findItemById(String id) {
         return itemRepository.findById(id);
     }
 
@@ -83,7 +83,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public void deleteItem(Long id) {
+    public void deleteItem(String id) {
 
         findItemById(id).ifPresent(item -> {
             item.setActive(false);
