@@ -25,7 +25,7 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/user/{name}")
+    @GetMapping("/user/{firstName,lastName}")
     public ResponseEntity getUserByName(@PathVariable String firstName, String lastname){
         userService.findUserName(firstName, lastname);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -38,7 +38,7 @@ public class UserController {
     }
 
 
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping("/user/{username}")
     public ResponseEntity updateUser(@RequestBody User user, @PathVariable String username){
         userService.updateUser(username,user);
         HttpHeaders headers = new HttpHeaders();

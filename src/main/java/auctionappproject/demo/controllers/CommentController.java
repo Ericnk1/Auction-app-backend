@@ -17,13 +17,13 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
 
-    @GetMapping("/users/{username}")
+    @GetMapping("/users/{username}/feedbacks/from")
     public List<Comment> getAllCommentsFromUser(@PathVariable String username) {
 
         return commentService.getAllCommentsFrom(username);
     }
 
-    @GetMapping("/users/{username}")
+    @GetMapping("/users/{username}/feedbacks/to")
     public List<Comment> getAllCommentsToUser(@PathVariable String username){
 
         return commentService.getAllCommentsTo(username);

@@ -38,6 +38,8 @@ public class User {
     private double penalty = 0;// 30% from unpaid lot
 
     private boolean isActive;
+    @OneToOne(cascade = CascadeType.MERGE)
+    private Authority authority;
 
     public User(String username, String password, String firstName, String lastName, String email, String phoneNumber, String address, double balance) {
         this.username = username;
