@@ -1,4 +1,4 @@
-package auctionappproject.demo.model;
+package auctionappproject.demo.models;
 
 import lombok.Data;
 
