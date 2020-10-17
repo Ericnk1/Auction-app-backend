@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface AuctionRepository extends JpaRepository<Auction, String> {
+public interface AuctionRepository extends JpaRepository<Auction, Long> {
 
     List<Auction> findBySellerUsername (String username);
     List<Auction> findByBuyerUsername (String username);

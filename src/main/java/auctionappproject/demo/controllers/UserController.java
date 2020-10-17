@@ -19,14 +19,14 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/user/{id}")
-    public ResponseEntity getUser(@PathVariable Long id){
+    @GetMapping("/{id}")
+    public ResponseEntity getUser(@PathVariable("id") Long id){
         userService.findUserById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/user/{firstName,lastName}")
-    public ResponseEntity getUserByName(@PathVariable String firstName, String lastname){
+    public ResponseEntity getUserByName(@PathVariable("firstName,lastName") String firstName, String lastname){
         userService.findUserName(firstName, lastname);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -38,17 +38,17 @@ public class UserController {
     }
 
 
-    @PutMapping("/user/{username}")
-    public ResponseEntity updateUser(@RequestBody User user, @PathVariable String username){
-        userService.updateUser(username,user);
+    @PutMapping("/{id}")
+    public ResponseEntity updateUser(@RequestBody User user, @PathVariable("id") Long id){
+        userService.updateUser(id,user);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setDate(new Date().toInstant());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/delete/{id}")
-    public ResponseEntity  deleteUser(@PathVariable Long id){
+    @DeleteMapping("/{id}")
+    public ResponseEntity  deleteUser(@PathVariable("id") Long id){
         userService.deleteUser(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

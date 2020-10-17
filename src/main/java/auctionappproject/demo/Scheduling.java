@@ -1,9 +1,9 @@
 package auctionappproject.demo;
 
 import auctionappproject.demo.models.Auction;
-import auctionappproject.demo.models.Item;
+import auctionappproject.demo.models.Product;
 import auctionappproject.demo.repositories.AuctionRepository;
-import auctionappproject.demo.repositories.ItemRepository;
+import auctionappproject.demo.repositories.ProductRepository;
 import auctionappproject.demo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -23,7 +23,7 @@ import java.util.List;
 public class Scheduling {
 
     @Autowired
-    private ItemRepository itemRepository;
+    private ProductRepository productRepository;
 
     @Autowired
     private AuctionRepository auctionRepository;
@@ -37,10 +37,10 @@ public class Scheduling {
         DateFormat dtfrm = DateFormat.getDateInstance();
         String endDate = dtfrm.format(curTime);
 
-        List<Item> items = new ArrayList<>();
-        itemRepository.findByEndDate(endDate)
-                .forEach(items::add);
-        items.stream()
+        List<Product> products = new ArrayList<>();
+        productRepository.findByEndDate(endDate)
+                .forEach(products::add);
+        products.stream()
                 .peek((e)
                                 -> {
                             Auction auction = new Auction(e);
@@ -62,7 +62,7 @@ public class Scheduling {
 
                         }
                 )
-                .forEach(itemRepository :: delete);
+                .forEach(productRepository:: delete);
 
     }
 

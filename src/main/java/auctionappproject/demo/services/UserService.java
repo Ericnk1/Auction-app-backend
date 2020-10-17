@@ -36,7 +36,7 @@ public interface UserService {
      */
     Optional<User> findByUsernameAndPassword(String username, String password);
 
-    void updateUser(String username, User user);
+    void updateUser(Long username, User user);
 
     Optional<User> findUserById(Long id);
 

@@ -1,6 +1,7 @@
 package auctionappproject.demo.services.implementations;
 
 import auctionappproject.demo.models.Auction;
+import auctionappproject.demo.models.Product;
 import auctionappproject.demo.models.User;
 import auctionappproject.demo.repositories.AuctionRepository;
 import auctionappproject.demo.repositories.UserRepository;
@@ -35,21 +36,32 @@ public class AuctionServiceImpl implements AuctionService {
     }
 
     @Override
-    public void auctionPayment(String username, String auctionId) {
+    public void auctionPayment(String username, Long auctionId) {
 
         Auction tempAuction = auctionRepository.getOne(auctionId);
         if(tempAuction.getStatus().equals("NOT PAID")) {
-            User tempBuyerUser = userRepository.getOne(tempAuction.getBuyer().getUsername());
+            User tempBuyerUser = userRepository.getOne(tempAuction.getBuyer().getId());
             if (tempBuyerUser.getBalance() >= tempAuction.getPrice()) {
                 tempBuyerUser.subtractMoney(tempAuction.getPrice());
                 userRepository.save(tempBuyerUser);
-                User tempSellerUser = userRepository.getOne(tempAuction.getSeller().getUsername());
+                User tempSellerUser = userRepository.getOne(tempAuction.getSeller().getId());
                 tempSellerUser.addMoney(tempAuction.getPrice());
                 userRepository.save(tempSellerUser);
             }
             tempAuction.setStatus("PAID");
             auctionRepository.save(tempAuction);
         }
+    }
+
+    @Override
+    public void addAuction(Auction auction) {
+       auctionRepository.save(auction);
+    }
+
+    @Override
+    public void deleteAuction(Long id) {
+        auctionRepository.findById(id).ifPresent(auction ->
+                auctionRepository.delete(auction));
     }
 
 }

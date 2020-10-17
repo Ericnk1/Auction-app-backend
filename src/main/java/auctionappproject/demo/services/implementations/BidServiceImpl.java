@@ -1,8 +1,8 @@
 package auctionappproject.demo.services.implementations;
 
-import auctionappproject.demo.models.Item;
+import auctionappproject.demo.models.Product;
 import auctionappproject.demo.models.User;
-import auctionappproject.demo.repositories.ItemRepository;
+import auctionappproject.demo.repositories.ProductRepository;
 import auctionappproject.demo.repositories.UserRepository;
 import auctionappproject.demo.services.BidService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,45 +19,47 @@ public class BidServiceImpl implements BidService {
     UserRepository userRepository;
 
     @Autowired
-    ItemRepository itemRepository;
+    ProductRepository productRepository;
 
     @Override
-    public List<Item> getAllBidsByUsername(String username) {
-        List<Item> items = new ArrayList<>();
-        items.addAll(itemRepository.findByBuyerUsername(username));
-        return items;
+    public List<Product> getAllBidsByUsername(String username) {
+        List<Product> products = new ArrayList<>();
+        products.addAll(productRepository.findByBuyerUsername(username));
+        return products;
     }
 
     @Override
-    public void addBid(Item item, String username, double amount) {
+    public void addBid(Product product, String username, double amount) {
 
-        Optional<Item> tempItem = itemRepository.findById(item.getId());
+        Optional<Product> tempItem = productRepository.findById(product.getId());
         User user = userRepository.findByUsername(username);
         if(user.getPenalty()==0 && tempItem.get().getPrice()< amount ) {
             tempItem.get().setPrice(amount);
-            item.setSeller(itemRepository.findById(item.getId()).get().getSeller());
-            item.setBuyer(new User(username,"", "", "", "", "", "", 0));
-            itemRepository.save(item);
+            product.setSeller(productRepository.findById(product.getId()).get().getSeller());
+            product.setBuyer(new User(username,"", "", "", "", "", "", 0));
+            productRepository.save(product);
         }
 
     }
 
     @Override
-    public Optional<Item> getBid(String id) {
-        return itemRepository.findById(id);
+    public Optional<Product> getBid(Long id) {
+        return productRepository.findById(id);
     }
 
     @Override
-    public void updateBid(Item item, double amount) {
+    public void updateBid(Product product, double amount) {
 
-        Optional<Item> tempItem = itemRepository.findById(item.getId());
+        Optional<Product> tempItem = productRepository.findById(product.getId());
         if(tempItem.get().getPrice()< amount ) {
             tempItem.get().setPrice(amount);
-            item.setSeller(tempItem.get().getSeller());
-            item.setBuyer(tempItem.get().getBuyer());
-            itemRepository.save(item);
+            product.setSeller(tempItem.get().getSeller());
+            product.setBuyer(tempItem.get().getBuyer());
+            productRepository.save(product);
         }
     }
+
+
 
 
 }

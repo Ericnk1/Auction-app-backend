@@ -9,13 +9,15 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @Table
-public class Item {
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    private String category;
+
+    @Enumerated(EnumType.STRING)
+    private Category category;
     private String description;
     private double price;
     private String endDate;

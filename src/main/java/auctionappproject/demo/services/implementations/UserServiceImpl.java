@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUser(String username, User user) {
+    public void updateUser(Long id, User user) {
 
         userRepository.saveAndFlush(user);
 
@@ -46,15 +46,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> findUserById(Long id) {
-        return userRepository.findById(String.valueOf(id));
+        return userRepository.findById(id);
     }
 
     @Override
     public void deleteUser(Long id) {
 
         findUserById(id).ifPresent(user -> {
-            user.setActive(false);
-            updateUser(user.getUsername(), user);
+            userRepository.delete(user);
+            /*user.setActive(false);
+            updateUser(user.getUsername(), user);*/
         });
 
     }

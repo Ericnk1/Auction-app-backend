@@ -1,17 +1,17 @@
 package auctionappproject.demo.services;
 
-import auctionappproject.demo.models.Item;
+import auctionappproject.demo.models.Product;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface BidService {
 
-    List<Item> getAllBidsByUsername(String username);
+    List<Product> getAllBidsByUsername(String username);
 
-    void addBid(Item item, String username, double amount);
+    void addBid(Product product, String username, double amount);
 
-    Optional<Item> getBid(String id);
+    Optional<Product> getBid(Long id);
 
-    void updateBid(Item item,  double amount);
+    void updateBid(Product product, double amount);
 }
