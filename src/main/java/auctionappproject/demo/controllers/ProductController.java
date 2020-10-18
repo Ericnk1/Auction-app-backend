@@ -33,7 +33,7 @@ public class ProductController {
         return productService.getAllUserProducts(user.getUsername());
     }
 
-    /*@GetMapping("/{id}")
+    @GetMapping("get-by-id/{id}")
     public ResponseEntity<?> getProductById(@PathVariable("id") Long id){
         Optional<Product> optionalItem = productService.findProductById(id);
 
@@ -44,12 +44,12 @@ public class ProductController {
         }
     }
 
-    @GetMapping("/{category}")
+    @GetMapping("get-by-category/{category}")
     public List<Product> getAllIProductsByCategory(@PathVariable("category") String category){
         return productService.getAllProductByCategory(category);
-    }*/
+    }
 
-    @GetMapping("/{name}")
+    @GetMapping("get-by-name/{name}")
     public List<Product> getProductsByName(@PathVariable("name") String name){
         return productService.findProductByName(name);
     }
@@ -77,9 +77,9 @@ public class ProductController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    /*@GetMapping("/{date}")
+    @GetMapping("get-by-date/{date}")
     public List<Product> getProductByEndDate(@PathVariable("date") String date){
-        return productService.findByEndDate(date);}*/
+        return productService.findByEndDate(date);}
 
 
 

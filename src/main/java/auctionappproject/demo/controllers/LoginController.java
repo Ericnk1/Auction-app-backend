@@ -18,8 +18,10 @@ public class LoginController {
 
     @PostMapping
     public ResponseEntity<?> postLogin(@RequestBody Login login) throws InvalidLoginException {
-
-        loginService.validateLogin(login);
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        try {
+            loginService.validateLogin(login);
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        }catch (InvalidLoginException exception)
+        {return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);}
     }
 }
